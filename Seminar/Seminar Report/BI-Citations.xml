@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<b:Sources xmlns:b="http://schemas.openxmlformats.org/officeDocument/2006/bibliography" xmlns="http://schemas.openxmlformats.org/officeDocument/2006/bibliography" SelectedStyle="">
+    <b:Source>
+        <b:Year>2012</b:Year>
+        <b:Volume>90</b:Volume>
+        <b:BIBTEX_Entry>article</b:BIBTEX_Entry>
+        <b:SourceType>JournalArticle</b:SourceType>
+        <b:Title>Making Advanced Analytics Work for You</b:Title>
+        <b:Tag>Barton2012</b:Tag>
+        <b:Author>
+            <b:Author>
+                <b:NameList>
+                    <b:Person>
+                        <b:Last>Barton</b:Last>
+                        <b:First>Dominic</b:First>
+                    </b:Person>
+                    <b:Person>
+                        <b:Last>Court</b:Last>
+                        <b:First>David</b:First>
+                    </b:Person>
+                </b:NameList>
+            </b:Author>
+        </b:Author>
+        <b:Pages>78-83, 128</b:Pages>
+        <b:Month>October</b:Month>
+        <b:JournalName>Harvard business review</b:JournalName>
+    </b:Source>
+    <b:Source>
+        <b:Year>2011</b:Year>
+        <b:Volume>54</b:Volume>
+        <b:BIBTEX_Entry>article</b:BIBTEX_Entry>
+        <b:SourceType>JournalArticle</b:SourceType>
+        <b:Title>An Overview of Business Intelligence Technology</b:Title>
+        <b:Tag>Chaudhuri2011</b:Tag>
+        <b:DOI>10.1145/1978542.1978562</b:DOI>
+        <b:Author>
+            <b:Author>
+                <b:NameList>
+                    <b:Person>
+                        <b:Last>Chaudhuri</b:Last>
+                        <b:First>Surajit</b:First>
+                    </b:Person>
+                    <b:Person>
+                        <b:Last>Dayal</b:Last>
+                        <b:First>Umeshwar</b:First>
+                    </b:Person>
+                    <b:Person>
+                        <b:Last>Narasayya</b:Last>
+                        <b:First>Vivek</b:First>
+                    </b:Person>
+                </b:NameList>
+            </b:Author>
+        </b:Author>
+        <b:Pages>88-98</b:Pages>
+        <b:Month>August</b:Month>
+        <b:JournalName>Commun. ACM</b:JournalName>
+    </b:Source>
+    <b:Source>
+        <b:Year>2012</b:Year>
+        <b:Volume>36</b:Volume>
+        <b:BIBTEX_Entry>article</b:BIBTEX_Entry>
+        <b:SourceType>JournalArticle</b:SourceType>
+        <b:Title>Business Intelligence and Analytics: From Big Data to Big Impact</b:Title>
+        <b:Publisher>JSTOR</b:Publisher>
+        <b:Tag>Chen2012</b:Tag>
+        <b:URL>http://dx.doi.org/10.2307/41703503</b:URL>
+        <b:DOI>10.2307/41703503</b:DOI>
+        <b:Author>
+            <b:Author>
+                <b:NameList>
+                    <b:Person>
+                        <b:Last>Chen</b:Last>
+                    </b:Person>
+                    <b:Person>
+                        <b:Last>Chiang</b:Last>
+                    </b:Person>
+                    <b:Person>
+                        <b:Last>Storey</b:Last>
+                    </b:Person>
+                </b:NameList>
+            </b:Author>
+        </b:Author>
+        <b:Pages>1165</b:Pages>
+        <b:JournalName>MIS Quarterly</b:JournalName>
+        <b:Number>4</b:Number>
+        <b:StandardNumber> ISSN: 0276-7783</b:StandardNumber>
+    </b:Source>
+    <b:Source>
+        <b:Year>2010</b:Year>
+        <b:Volume>1</b:Volume>
+        <b:BIBTEX_Entry>article</b:BIBTEX_Entry>
+        <b:SourceType>JournalArticle</b:SourceType>
+        <b:Title>Business Intelligence and Organizational Decisions</b:Title>
+        <b:Tag>Davenport2010</b:Tag>
+        <b:DOI>10.4018/jbir.2010071701</b:DOI>
+        <b:Author>
+            <b:Author>
+                <b:NameList>
+                    <b:Person>
+                        <b:Last>Davenport</b:Last>
+                        <b:First>Thomas</b:First>
+                    </b:Person>
+                </b:NameList>
+            </b:Author>
+        </b:Author>
+        <b:Pages>1-12</b:Pages>
+        <b:Month>January</b:Month>
+        <b:JournalName>IJBIR</b:JournalName>
+    </b:Source>
+    <b:Source>
+        <b:Year>2010</b:Year>
+        <b:Volume>1</b:Volume>
+        <b:BIBTEX_Entry>article</b:BIBTEX_Entry>
+        <b:SourceType>JournalArticle</b:SourceType>
+        <b:Title>The BI-based organization</b:Title>
+        <b:Tag>Wixom2010</b:Tag>
+        <b:DOI>10.4018/jbir.2010071702</b:DOI>
+        <b:Author>
+            <b:Author>
+                <b:NameList>
+                    <b:Person>
+                        <b:Last>Wixom</b:Last>
+                        <b:First>Barb</b:First>
+                    </b:Person>
+                    <b:Person>
+                        <b:Last>Watson</b:Last>
+                        <b:First>Hugh</b:First>
+                    </b:Person>
+                </b:NameList>
+            </b:Author>
+        </b:Author>
+        <b:Pages>13-28</b:Pages>
+        <b:Month>January</b:Month>
+        <b:JournalName>IJBIR</b:JournalName>
+    </b:Source>
+    <b:Source>
+        <b:Department>University of Skövde, School of Informatics</b:Department>
+        <b:Year>2020</b:Year>
+        <b:Volume>11</b:Volume>
+        <b:BIBTEX_Entry>article</b:BIBTEX_Entry>
+        <b:Comments>CC BY 4.0</b:Comments>
+        <b:SourceType>JournalArticle</b:SourceType>
+        <b:Title>13 Organizations' Attempts to Become Data-Driven</b:Title>
+        <b:Tag>Berndtsson2020</b:Tag>
+        <b:BIBTEX_Abstract>Becoming a data-driven organization is a vision for several organizations. It has been frequently mentioned in the literature that data-driven organizations are likely to be more successful than organizations that mostly make decisions on gut feeling. However, few organizations make a successful shift to become data-driven, due to a number of different types of barriers. This article investigates, the initial journey to become a data-driven organization for 13 organizations. Data has been collected via documents and interviews, and then analyzed with respect to: i) how they scaled up the usage of analytics to become data-driven; ii) strategies developed; iii) barriers encountered; and iv) usage of an overall change process. The findings are that most organizations start their journey via a pilot project, take shortcuts when developing strategies, encounter previously reported top barriers, and do not use an overall change management process. </b:BIBTEX_Abstract>
+        <b:DOI>10.4018/IJBIR.2020010101</b:DOI>
+        <b:Author>
+            <b:Author>
+                <b:NameList>
+                    <b:Person>
+                        <b:Last>Berndtsson</b:Last>
+                        <b:First>Mikael</b:First>
+                    </b:Person>
+                    <b:Person>
+                        <b:Last>Lennerholt</b:Last>
+                        <b:First>Christian</b:First>
+                    </b:Person>
+                    <b:Person>
+                        <b:Last>Svahn</b:Last>
+                        <b:First>Thomas</b:First>
+                    </b:Person>
+                    <b:Person>
+                        <b:Last>Larsson</b:Last>
+                        <b:First>Peter</b:First>
+                    </b:Person>
+                </b:NameList>
+            </b:Author>
+        </b:Author>
+        <b:Pages>1–21</b:Pages>
+        <b:JournalName>International Journal of Business Intelligence Research</b:JournalName>
+        <b:Number>1</b:Number>
+    </b:Source>
+    <b:Source>
+        <b:Year>2007</b:Year>
+        <b:BIBTEX_Entry>misc</b:BIBTEX_Entry>
+        <b:Comments>[Online; accessed 2023-11-15]</b:Comments>
+        <b:SourceType>Misc</b:SourceType>
+        <b:Title>Creating a Data Driven Culture</b:Title>
+        <b:BIBTEX_HowPublished>https://www.youtube.com/watch?v=OTu02Gab0Qw</b:BIBTEX_HowPublished>
+        <b:Tag>Kaushik2007</b:Tag>
+        <b:Author>
+            <b:Author>
+                <b:NameList>
+                    <b:Person>
+                        <b:Last>Kaushik</b:Last>
+                        <b:First>Avinash</b:First>
+                    </b:Person>
+                </b:NameList>
+            </b:Author>
+        </b:Author>
+        <b:Month>September</b:Month>
+        <b:PublicationTitle>Creating a Data Driven Culture</b:PublicationTitle>
+    </b:Source>
+    <b:Source>
+        <b:Year>2012</b:Year>
+        <b:Volume>90</b:Volume>
+        <b:BIBTEX_Entry>article</b:BIBTEX_Entry>
+        <b:SourceType>JournalArticle</b:SourceType>
+        <b:Title>Big data: The management revolution</b:Title>
+        <b:Tag>McAfee2012</b:Tag>
+        <b:Author>
+            <b:Author>
+                <b:NameList>
+                    <b:Person>
+                        <b:Last>McAfee</b:Last>
+                        <b:First>A.</b:First>
+                    </b:Person>
+                    <b:Person>
+                        <b:Last>Brynjolfsson</b:Last>
+                        <b:First>Erik</b:First>
+                    </b:Person>
+                    <b:Person>
+                        <b:Last>Davenport</b:Last>
+                        <b:First>Thomas</b:First>
+                    </b:Person>
+                    <b:Person>
+                        <b:Last>Patil</b:Last>
+                        <b:Middle>J.</b:Middle>
+                        <b:First>D.</b:First>
+                    </b:Person>
+                    <b:Person>
+                        <b:Last>Barton</b:Last>
+                        <b:First>D.</b:First>
+                    </b:Person>
+                </b:NameList>
+            </b:Author>
+        </b:Author>
+        <b:Pages>61-67</b:Pages>
+        <b:Month>January</b:Month>
+        <b:JournalName>Harvard Bus Rev</b:JournalName>
+    </b:Source>
+    <b:Source>
+        <b:Year>2015</b:Year>
+        <b:Volume>4</b:Volume>
+        <b:BIBTEX_Entry>article</b:BIBTEX_Entry>
+        <b:SourceType>JournalArticle</b:SourceType>
+        <b:Title>All About Analytics</b:Title>
+        <b:Tag>Watson2015</b:Tag>
+        <b:DOI>10.4018/jbir.2013010102</b:DOI>
+        <b:Author>
+            <b:Author>
+                <b:NameList>
+                    <b:Person>
+                        <b:Last>Watson</b:Last>
+                        <b:First>Hugh</b:First>
+                    </b:Person>
+                </b:NameList>
+            </b:Author>
+        </b:Author>
+        <b:Pages>13-28</b:Pages>
+        <b:Month>July</b:Month>
+        <b:JournalName>International Journal of Business Intelligence Research</b:JournalName>
+    </b:Source>
+    <b:Source>
+        <b:Year>2021</b:Year>
+        <b:Volume>3</b:Volume>
+        <b:BIBTEX_Entry>article</b:BIBTEX_Entry>
+        <b:Comments>https://hdsr.mitpress.mit.edu/pub/2fu65ujf</b:Comments>
+        <b:SourceType>JournalArticle</b:SourceType>
+        <b:Title>Deployment as a Critical Business Data Science Discipline</b:Title>
+        <b:Tag>Davenport2021Deployment</b:Tag>
+        <b:Author>
+            <b:Author>
+                <b:NameList>
+                    <b:Person>
+                        <b:Last>Davenport</b:Last>
+                        <b:First>Thomas</b:First>
+                    </b:Person>
+                    <b:Person>
+                        <b:Last>Malone</b:Last>
+                        <b:First>Katie</b:First>
+                    </b:Person>
+                </b:NameList>
+            </b:Author>
+        </b:Author>
+        <b:Month>February</b:Month>
+        <b:JournalName>Harvard Data Science Review</b:JournalName>
+        <b:Number>1</b:Number>
+    </b:Source>
+</b:Sources>
