@@ -26,8 +26,8 @@ def plot_delayed_flights(df):
     ))
 
     fig.update_layout(
-        title=dict(text='Delayed and Non-Delayed Flights per Unique Carrier', font=dict(color='grey')),
-        xaxis=dict(title='Unique Carrier'),
+        title=dict(text='Delayed and Non-Delayed Flights per Airline', font=dict(color='grey')),
+        xaxis=dict(title='Airlines'),
         yaxis=dict(title='Number of Flights'),
         barmode='stack',
         width=750,
@@ -53,17 +53,18 @@ def plot_delay_pie_chart(df):
         values=sizes,
         pull=[0.1, 0],
         marker=dict(colors=colors),
-        textposition='outside',
+        textposition= 'inside',
         textinfo='label+percent',
-        insidetextorientation='radial'
+        insidetextorientation='radial',
+        textfont_color= ['black', 'black']
     )])
 
     fig.update_layout(
-        title=dict(text='Percentage of Delayed and Non-Delayed Flights', font=dict(color='grey')),
+        title=dict(text='Percentage of Delayed and Non-Delayed Flights', font=dict(color='grey'), y=1),
         width=750,
         height=500,
         showlegend=True,
-        legend=dict(x=0.41, y=1.12, orientation='h')
+        legend=dict(y=1.12, orientation='v')
     )
 
     return fig
@@ -79,15 +80,14 @@ def plot_null_value_counts(df):
 
     # Add x-axis and y-axis labels
     fig.update_layout(
-        title=dict(text='Null Value Counts for Each Attribute',font=dict(color='grey')),
-        xaxis_title='Attribute',
-        yaxis_title='Number of Null Values',
-        width=750,
-        height=500
+        title=dict(text='Null Value Counts for Each Attribute',font=dict(color='grey'), x=0.3, y=0.8),
+        xaxis_title='Attributes',
+        width=100,
+        height=300
     )
 
     # Rotate x-axis tick labels by 90 degrees
-    fig.update_layout(xaxis_tickangle=-90)
+    fig.update_layout(xaxis_tickangle=-45)
 
     # Display the Plotly figure using st.plotly_chart
     return fig
