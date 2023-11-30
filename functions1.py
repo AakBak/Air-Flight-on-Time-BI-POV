@@ -1,26 +1,55 @@
 import plotly.graph_objs as go
 import plotly.express as px
 from plotly.subplots import make_subplots
+from pyspark.sql import functions as F
+
+def plot_null_value_counts(df):
+    # Count the number of null values in each column
+    null_counts = [df.select(F.sum(F.col(c).isNull().cast("int")).alias(c)).collect()[0][0] for c in df.columns]
+
+    # Create a bar chart using plotly.graph_objs
+    fig = go.Figure(
+        go.Bar(x=df.columns, y=null_counts, marker_color='dimgray')
+    )
+
+    # Add x-axis and y-axis labels
+    fig.update_layout(
+        title=dict(text='Null Value Counts for Each Attribute', font=dict(color='grey'), x=0.3, y=0.8),
+        xaxis_title='Attributes',
+        width=100,
+        height=300
+    )
+
+    # Rotate x-axis tick labels by 90 degrees
+    fig.update_layout(xaxis_tickangle=-45)
+
+    # Display the Plotly figure using st.plotly_chart
+    return fig
 
 def plot_delayed_flights(df):
     # Group by airline and calculate the number of delayed and non-delayed flights
-    airline_stats = df.groupby('UniqueCarrier') \
-        .agg({'ArrDelay': lambda x: sum(x > 0), 'UniqueCarrier': 'size'}) \
-        .rename(columns={'ArrDelay': 'Delayed', 'UniqueCarrier': 'Non_Delayed'})
+    airline_stats = df.groupBy('UniqueCarrier') \
+        .agg(
+            F.sum(F.when(F.col('ArrDelay') > 0, 1).otherwise(0)).alias('Delayed'),
+            F.count('*').alias('Non_Delayed')
+        )
+
+    # Convert PySpark DataFrame to Pandas DataFrame for plotting
+    airline_stats_pd = airline_stats.toPandas()
 
     # Create a stacked bar chart using plotly.graph_objs
     fig = go.Figure()
 
     fig.add_trace(go.Bar(
-        x=airline_stats.index,
-        y=airline_stats['Non_Delayed'],
+        x=airline_stats_pd['UniqueCarrier'],
+        y=airline_stats_pd['Non_Delayed'],
         name='Non-Delayed Flights',
         marker=dict(color='limegreen')
     ))
 
     fig.add_trace(go.Bar(
-        x=airline_stats.index,
-        y=airline_stats['Delayed'],
+        x=airline_stats_pd['UniqueCarrier'],
+        y=airline_stats_pd['Delayed'],
         name='Delayed Flights',
         marker=dict(color='orangered')
     ))
@@ -36,6 +65,7 @@ def plot_delayed_flights(df):
     )
 
     return fig
+
 
 def plot_delay_pie_chart(df):
     # Calculate the number of delayed and non-delayed flights
@@ -67,29 +97,6 @@ def plot_delay_pie_chart(df):
         legend=dict(y=1.12, orientation='v')
     )
 
-    return fig
-
-def plot_null_value_counts(df):
-    # Count the number of null values in each column
-    null_counts = [df[c].isnull().sum() for c in df.columns]
-
-    # Create a bar chart using plotly.graph_objs
-    fig = go.Figure(
-        go.Bar(x=df.columns, y=null_counts, marker_color='dimgray')
-    )
-
-    # Add x-axis and y-axis labels
-    fig.update_layout(
-        title=dict(text='Null Value Counts for Each Attribute',font=dict(color='grey'), x=0.3, y=0.9),
-        xaxis_title='Attributes',
-        width=100,
-        height=400
-    )
-
-    # Rotate x-axis tick labels by 90 degrees
-    fig.update_layout(xaxis_tickangle=-45)
-
-    # Display the Plotly figure using st.plotly_chart
     return fig
 
 # import matplotlib.pyplot as plt

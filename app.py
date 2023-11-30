@@ -32,26 +32,35 @@ st.markdown(f"""
 
 @st.cache_data
 def load_data():
-    df1 = pd.read_csv('1991.csv.gz', encoding='ISO-8859-1', compression='gzip')
-    df2 = pd.read_csv('2001.csv.gz', encoding='ISO-8859-1', compression='gzip')
-    # df = pd.concat([df1, df2])
-    return df1, df2
+    df1_uncleaned = pd.read_csv('1991.csv.gz', encoding='ISO-8859-1', compression='gzip')
+    df2_uncleaned = pd.read_csv('2001.csv.gz', encoding='ISO-8859-1', compression='gzip')
+    return df1_uncleaned, df2_uncleaned
 
-df1, df2 = load_data()
+df1_uncleaned, df2_uncleaned= load_data()
 
-# Tabs
-tab1, tab2, tab3 = st.tabs(["Data Exploration", "Data Engineering", "Data Modelling"])
+# Cleaned data
+df1 = df1_uncleaned.drop(columns = ['TailNum', 'AirTime', 'TaxiIn', 'TaxiOut', 'CancellationCode',
+        'CarrierDelay', 'WeatherDelay', 'NASDelay', 'SecurityDelay', 'LateAircraftDelay'])
+df1 = df1.dropna(axis= 0, how = 'any')
+df2 = df2_uncleaned.drop(columns = ['CancellationCode', 'CarrierDelay', 'WeatherDelay', 'NASDelay',
+                        'SecurityDelay', 'LateAircraftDelay'])
+df2 = df2.dropna(axis= 0, how = 'any')
 
 # Sidebar
-display_null_values = st.sidebar.checkbox(label="Display Null Values")
-display_dataset = st.sidebar.checkbox(label="Dispaly Dataset")
+# display_null_values = st.sidebar.checkbox(label="Display Null Values")
+# display_dataset = st.sidebar.checkbox(label="Dispaly Dataset")
 with st.sidebar.expander("Filter"):
-    feature_selection1 = st.multiselect(label="Airline",
-                                            options = np.union1d(df1['UniqueCarrier'].unique(), df2['UniqueCarrier'].unique()))
-    feature_selection2 = st.multiselect(label="Origin",
-                                            options = np.union1d(df1['Origin'].unique(), df2['Origin'].unique()))
-    feature_selection3 = st.multiselect(label="Destination",
-                                            options = np.union1d(df1['Dest'].unique(), df2['Dest'].unique()))
+    feature_selection1 = st.multiselect(label="Airline", options = np.union1d(df1['UniqueCarrier'].unique(), df2['UniqueCarrier'].unique()))
+    feature_selection2 = st.multiselect(label="Origin", options = np.union1d(df1['Origin'].unique(), df2['Origin'].unique()))
+    feature_selection3 = st.multiselect(label="Destination", options = np.union1d(df1['Dest'].unique(), df2['Dest'].unique()))
+    A1, A2, A3 = st.columns(3)
+    with A1:
+        feature_selection4 = st.multiselect(label="Year", options = np.union1d(df1['Year'].unique(), df2['Year'].unique()), placeholder='')
+    with A2:
+        feature_selection5 = st.multiselect(label="Month", options = np.union1d(df1['Month'].unique(), df2['Month'].unique()), placeholder='')
+    with A3:
+        feature_selection6 = st.multiselect(label="Day", options = np.union1d(df1['DayofMonth'].unique(), df2['DayofMonth'].unique()), placeholder='')
+
 # Filter features
 query_filter = []
 query = ''
@@ -61,14 +70,40 @@ if feature_selection2 :
     query_filter.append(f'Origin in {feature_selection2}')
 if feature_selection3 :
     query_filter.append(f'Dest in {feature_selection3}')
-
+if feature_selection4:
+    query_filter.append(f'Year in {feature_selection4}')
+if feature_selection5:
+    query_filter.append(f'Month in {feature_selection5}')
+if feature_selection6:
+    query_filter.append(f'DayofMonth in {feature_selection6}')
 query = ' & '.join(query_filter)
 df1991 = df1.query(query) if query else df1
 df2001 = df2.query(query) if query else df2
 
+# Tabs
+tab1, tab2, tab3 = st.tabs(["Datasets", "Data Cleaning", "Data Exploration"])
+
 # Dashboard design
 with st.spinner("Loading..."):
     with tab1:
+        A1, A2, A3 = st.columns([1, 0.2, 1])
+        with A1:
+            st.markdown('<h1 style="text-align:center;color:lightblue;">1991 Flights</h1>', unsafe_allow_html=True)
+            st.dataframe(data=df1_uncleaned.head(50), use_container_width=True)
+        with A3:
+            st.markdown('<h1 style="text-align:center;color:lightblue;">2001 Flights</h1>', unsafe_allow_html=True)
+            st.dataframe(data=df2_uncleaned.head(50), use_container_width=True)
+    
+    with tab2:
+        A1, A2, A3 = st.columns([1, 0.2, 1])
+        with A1:
+            st.markdown('<h1 style="text-align:center;color:lightblue;">1991 Flights</h1>', unsafe_allow_html=True)
+            st.plotly_chart(f.plot_null_value_counts(df1_uncleaned), use_container_width=True)
+        with A3:
+            st.markdown('<h1 style="text-align:center;color:lightblue;">2001 Flights</h1>', unsafe_allow_html=True)
+            st.plotly_chart(f.plot_null_value_counts(df2_uncleaned), use_container_width=True)
+
+    with tab3:
         A1, A2, A3 = st.columns([1, 0.2, 1])
         with A1:
             st.markdown('<h1 style="text-align:center;color:lightblue;">1991</h1>', unsafe_allow_html=True)
@@ -102,22 +137,6 @@ with st.spinner("Loading..."):
                 st.metric(label = 'Airlines', value = numerize(len(df2001['UniqueCarrier'].unique())))
         st.divider()
 
-        if display_null_values:
-            A1, A2, A3 = st.columns([1, 0.2, 1])
-            with A1:
-                st.plotly_chart(f.plot_null_value_counts(df1991), use_container_width=True)
-            with A3:
-                st.plotly_chart(f.plot_null_value_counts(df2001), use_container_width=True)
-            st.divider()
-
-        if display_dataset:
-            A1, A2, A3 = st.columns([1, 0.2, 1])
-            with A1:
-                st.dataframe(data=df1991.head(50), use_container_width=True)
-            with A3:
-                st.dataframe(data=df2001.head(50), use_container_width=True)
-            st.divider()
-
         # Stacked-bar plot
         A1, A2, A3 = st.columns([1, 0.2, 1])
         with A1:
@@ -134,7 +153,14 @@ with st.spinner("Loading..."):
             st.plotly_chart(f.plot_delay_pie_chart(df2001), use_container_width=True, align='center')
         st.divider()
 
-# # Example usage with your specified attributes
+        # Line chart
+        A1, A2, A3 = st.columns([1, 0.2, 1])
+        with A1:
+            st.plotly_chart(f.plot_flights_by_carrier(df1991), use_container_width=True)
+        with A3:
+            st.plotly_chart(f.plot_flights_by_carrier(df2001), use_container_width=True)
+        st.divider()
+
 # attributes_to_plot = ['DepTime', 'CRSDepTime', 'ArrTime', 'CRSArrTime', 'ActualElapsedTime',
 #                       'CRSElapsedTime', 'AirTime', 'ArrDelay', 'DepDelay', 'Distance', 'TaxiIn',
 #                       'TaxiOut']
@@ -144,3 +170,11 @@ with st.spinner("Loading..."):
 
 # # Display the plot using Streamlit
 # st.pyplot(fig)
+
+# df1 = df1.drop(columns = ['TailNum', 'AirTime', 'TaxiIn', 'TaxiOut', 'CancellationCode',
+#         'CarrierDelay', 'WeatherDelay', 'NASDelay', 'SecurityDelay', 'LateAircraftDelay'])
+# df1 = df1.dropna(axis= 0, how = 'any')
+
+# df2 = df2.drop(columns = ['CancellationCode', 'CarrierDelay', 'WeatherDelay', 'NASDelay',
+#                         'SecurityDelay', 'LateAircraftDelay'])
+# df2 = df2.dropna(axis= 0, how = 'any')
