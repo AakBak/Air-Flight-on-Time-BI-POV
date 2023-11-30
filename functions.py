@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
 import plotly.graph_objs as go
 
 def plot_delayed_flights(df):
@@ -91,3 +92,50 @@ def plot_null_value_counts(df):
 
     # Display the Plotly figure using st.plotly_chart
     return fig
+
+# import matplotlib.pyplot as plt
+# import seaborn as sb
+
+# def create_box_plots(df):
+#     # Get the number of columns in the DataFrame
+#     num_columns = df.shape[1]
+
+#     # Calculate the number of rows and columns for subplots
+#     num_rows = 1
+#     num_cols = min(num_columns, 3)  # Display up to 3 columns in each row
+
+#     # Calculate the number of rows needed
+#     num_rows = (num_columns + num_cols - 1) // num_cols
+
+#     # Create figure and subplots with a transparent background
+#     fig, axs = plt.subplots(num_rows, num_cols, figsize=(num_cols * 5, num_rows * 4), tight_layout=True, facecolor='none')
+
+#     # If there is only one column, axs is a single Axes object, so convert it to a 2D list
+#     axs = [axs] if num_rows == 1 else axs
+
+#     # Iterate over columns and create a boxplot on each subplot
+#     for i in range(num_columns):
+#         row_index = i // num_cols
+#         col_index = i % num_cols
+#         sb.boxplot(y=df.iloc[:, i], showmeans=True, orient='v', color='#8B4513',  # Brown color
+#                    boxprops=dict(color='brown'),  # Color of the box
+#                    medianprops=dict(color='white'),  # Color of the median line
+#                    whiskerprops=dict(color='white'),  # Color of the whisker lines
+#                    capprops=dict(color='white'),  # Color of the caps on the whisker lines
+#                    flierprops=dict(markeredgecolor='white', markerfacecolor='white'),  # Color of the outliers
+#                    meanprops={"marker": "o", "markerfacecolor": "white", "markeredgecolor": "white"},  # Color of the mean point
+#                    saturation=0.5, ax=axs[row_index, col_index])
+#         # Add grid to each subplot
+#         axs[row_index, col_index].grid(True, color="white", linewidth="0.5", linestyle="-.", alpha=0.3)
+#         axs[row_index, col_index].set_ylabel(df.columns[i], color='white')  # Set ylabel as title along y-axis
+
+#         # Set background color to be transparent
+#         axs[row_index, col_index].set_facecolor('none')
+
+#         # Set y-axis label color
+#         axs[row_index, col_index].yaxis.label.set_color('white')
+
+#     # Set common xlabel along x-axis
+#     axs[0, 0].set_xlabel('Value', color='white')
+
+#     return fig
