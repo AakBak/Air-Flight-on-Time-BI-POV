@@ -2,6 +2,7 @@ import plotly.graph_objs as go
 import plotly.express as px
 from plotly.subplots import make_subplots
 from pyspark.sql import functions as F
+from pyspark.sql.functions import col
 
 def plot_null_value_counts(df):
     # Count the number of null values in each column
@@ -98,6 +99,44 @@ def plot_delay_pie_chart(df):
     )
 
     return fig
+
+def plot_delay_pie_chart(df):
+    # Calculate the number of delayed and non-delayed flights
+    delayed_flights = df.filter(col('DELAYED') == 1).count()
+    non_delayed_flights = df.filter(col('DELAYED') == 0).count()
+
+    # Define the labels, sizes, and colors for the pie chart
+    labels = ['Delayed Flights', 'Non-Delayed Flights']
+    sizes = [delayed_flights, non_delayed_flights]
+    colors = ['#FF5733', '#8BC34A']
+
+    # Create the 3D pie chart
+    fig = go.Figure(data=[go.Pie(
+        labels=labels,
+        values=sizes,
+        pull=[0.1, 0],  
+        marker=dict(colors=colors),
+        textposition='inside',
+        textinfo='label+percent',
+        insidetextorientation='radial',
+        textfont_color=['black', 'black']
+    )])
+
+    fig.update_layout(
+        title=dict(text='Percentage of Delayed and Non-Delayed Flights', font=dict(color='grey'), y=1),
+        width=750,
+        height=500,
+        showlegend=True,
+        legend=dict(y=1.12, orientation='v')
+    )
+
+    return fig
+
+# Assuming 'df_agg' is your DataFrame
+# You can replace this with the actual DataFrame name
+
+# Example usage:
+# balanced_data = balance_delay_data(df_agg)
 
 # import matplotlib.pyplot as plt
 # import seaborn as sb

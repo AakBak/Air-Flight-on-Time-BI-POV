@@ -2,6 +2,7 @@ import plotly.graph_objs as go
 import plotly.express as px
 from plotly.subplots import make_subplots
 
+
 def plot_delayed_flights(df):
     # Group by airline and calculate the number of delayed and non-delayed flights
     airline_stats = df.groupby('UniqueCarrier') \
@@ -26,13 +27,83 @@ def plot_delayed_flights(df):
     ))
 
     fig.update_layout(
-        title=dict(text='Delayed and Non-Delayed Flights per Airline', font=dict(color='grey')),
+        title=dict(text='Delayed and Non-Delayed Flights by Airlines', font=dict(color='grey')),
         xaxis=dict(title='Airlines'),
         yaxis=dict(title='Number of Flights'),
         barmode='stack',
         width=750,
         height=500,
-        legend=dict(x=0.87, y=1.2, orientation='v')
+        legend=dict(x=0.77, y=1.2, orientation='v')
+    )
+
+    return fig
+
+def plot_delayed_flights_by_origin(df):
+    # Group by airline and calculate the number of delayed and non-delayed flights
+    airline_stats = df.groupby('Origin') \
+        .agg({'ArrDelay': lambda x: sum(x > 0), 'Origin': 'size'}) \
+        .rename(columns={'ArrDelay': 'Delayed', 'Origin': 'Non_Delayed'})
+
+    # Create a stacked bar chart using plotly.graph_objs
+    fig = go.Figure()
+
+    fig.add_trace(go.Bar(
+        x=airline_stats.index,
+        y=airline_stats['Non_Delayed'],
+        name='Non-Delayed Flights',
+        marker=dict(color='limegreen')
+    ))
+
+    fig.add_trace(go.Bar(
+        x=airline_stats.index,
+        y=airline_stats['Delayed'],
+        name='Delayed Flights',
+        marker=dict(color='orangered')
+    ))
+
+    fig.update_layout(
+        title=dict(text='Delayed and Non-Delayed Flights by Origins', font=dict(color='grey')),
+        xaxis=dict(title='Origins'),
+        yaxis=dict(title='Number of Flights'),
+        barmode='stack',
+        width=750,
+        height=500,
+        legend=dict(x=0.77, y=1.2, orientation='v')
+    )
+
+    return fig
+
+def plot_delayed_flights_by_destination(df):
+    # Group by airline and calculate the number of delayed and non-delayed flights
+    airline_stats = df.groupby('Dest') \
+        .agg({'ArrDelay': lambda x: sum(x > 0), 'Dest': 'size'}) \
+        .rename(columns={'ArrDelay': 'Delayed', 'Dest': 'Non_Delayed'})
+
+    # Create a stacked bar chart using plotly.graph_objs
+    fig = go.Figure()
+
+    fig.add_trace(go.Bar(
+        x=airline_stats.index,
+        y=airline_stats['Non_Delayed'],
+        name='Non-Delayed Flights',
+        marker=dict(color='limegreen')
+    ))
+
+    fig.add_trace(go.Bar(
+        x=airline_stats.index,
+        y=airline_stats['Delayed'],
+        name='Delayed Flights',
+        marker=dict(color='orangered')
+    ))
+
+    fig.update_layout(
+        title=dict(text='Delayed and Non-Delayed Flights by Destinations', font=dict(color='grey')),
+        xaxis=dict(title='Destinations'),
+        yaxis=dict(title='Number of Flights'),
+        barmode='stack',
+        width=750,
+        height=500,
+        legend=dict(x=0.77, y=1.2, orientation='v')
     )
 
     return fig
@@ -60,10 +131,10 @@ def plot_delay_pie_chart(df):
     )])
 
     fig.update_layout(
-        title=dict(text='Percentage of Delayed and Non-Delayed Flights', font=dict(color='grey'), y=1),
+        # title=dict(text='Percentage of Delayed and Non-Delayed Flights', font=dict(color='grey'), y=1),
         width=750,
         height=500,
-        showlegend=True,
+        showlegend=False,
         legend=dict(y=1.12, orientation='v')
     )
 
@@ -200,3 +271,16 @@ def plot_flights_by_carrier(df):
     )
 
     return fig
+
+from pyspark.sql import functions as F
+
+def calculate_delay_percentages(df, delay_col='DELAYED'):
+    
+    total_flights = df.count()
+    
+    not_delayed_count = df.filter(F.col(delay_col) == 0).count()
+    not_delayed_percentage = not_delayed_count / total_flights
+    
+    delayed_percentage = 1 - not_delayed_percentage
+    
+    return not_delayed_percentage, delayed_percentage

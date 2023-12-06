@@ -53,13 +53,13 @@ with st.sidebar.expander("Filter"):
     feature_selection1 = st.multiselect(label="Airline", options = np.union1d(df1['UniqueCarrier'].unique(), df2['UniqueCarrier'].unique()))
     feature_selection2 = st.multiselect(label="Origin", options = np.union1d(df1['Origin'].unique(), df2['Origin'].unique()))
     feature_selection3 = st.multiselect(label="Destination", options = np.union1d(df1['Dest'].unique(), df2['Dest'].unique()))
-    A1, A2, A3 = st.columns(3)
+    A1, A2, A3 = st.columns([1.01, 1, 1])
     with A1:
-        feature_selection4 = st.multiselect(label="Year", options = np.union1d(df1['Year'].unique(), df2['Year'].unique()), placeholder='')
+        feature_selection4 = st.multiselect(label="Year", options = np.union1d(df1['Year'].unique(), df2['Year'].unique()), placeholder='YYYY')
     with A2:
-        feature_selection5 = st.multiselect(label="Month", options = np.union1d(df1['Month'].unique(), df2['Month'].unique()), placeholder='')
+        feature_selection5 = st.multiselect(label="Month", options = np.union1d(df1['Month'].unique(), df2['Month'].unique()), placeholder='MM')
     with A3:
-        feature_selection6 = st.multiselect(label="Day", options = np.union1d(df1['DayofMonth'].unique(), df2['DayofMonth'].unique()), placeholder='')
+        feature_selection6 = st.multiselect(label="Day", options = np.union1d(df1['DayofMonth'].unique(), df2['DayofMonth'].unique()), placeholder='DD')
 
 # Filter features
 query_filter = []
@@ -140,24 +140,50 @@ with st.spinner("Loading..."):
         # Stacked-bar plot
         A1, A2, A3 = st.columns([1, 0.2, 1])
         with A1:
+            st.markdown('<h1 style="text-align:center;"><span style="color:#FF5733;">19</span><span style="color:#8BC34A;">91</span></h1>', unsafe_allow_html=True)
             st.plotly_chart(f.plot_delayed_flights(df1991), use_container_width=True)
         with A3:
+            st.markdown('<h1 style="text-align:center;"><span style="color:#FF5733;">20</span><span style="color:#8BC34A;">01</span></h1>', unsafe_allow_html=True)
             st.plotly_chart(f.plot_delayed_flights(df2001), use_container_width=True)
+        st.divider()
+
+        # Stacked-bar plot
+        A1, A2, A3 = st.columns([1, 0.2, 1])
+        with A1:
+            st.markdown('<h1 style="text-align:center;"><span style="color:#FF5733;">19</span><span style="color:#8BC34A;">91</span></h1>', unsafe_allow_html=True)
+            st.plotly_chart(f.plot_delayed_flights_by_origin(df1991), use_container_width=True)
+        with A3:
+            st.markdown('<h1 style="text-align:center;"><span style="color:#FF5733;">20</span><span style="color:#8BC34A;">01</span></h1>', unsafe_allow_html=True)
+            st.plotly_chart(f.plot_delayed_flights_by_origin(df2001), use_container_width=True)
+        st.divider()
+
+        # Stacked-bar plot
+        A1, A2, A3 = st.columns([1, 0.2, 1])
+        with A1:
+            st.markdown('<h1 style="text-align:center;"><span style="color:#FF5733;">19</span><span style="color:#8BC34A;">91</span></h1>', unsafe_allow_html=True)
+            st.plotly_chart(f.plot_delayed_flights_by_destination(df1991), use_container_width=True)
+        with A3:
+            st.markdown('<h1 style="text-align:center;"><span style="color:#FF5733;">20</span><span style="color:#8BC34A;">01</span></h1>', unsafe_allow_html=True)
+            st.plotly_chart(f.plot_delayed_flights_by_destination(df2001), use_container_width=True)
         st.divider()
 
         # Pie chart
         A1, A2, A3 = st.columns([1, 0.2, 1])
         with A1:
+            st.markdown('<h1 style="text-align:center;"><span style="color:#FF5733;">19</span><span style="color:#8BC34A;">91</span></h1>', unsafe_allow_html=True)
             st.plotly_chart(f.plot_delay_pie_chart(df1991), use_container_width=True, align='center')
         with A3:
+            st.markdown('<h1 style="text-align:center;"><span style="color:#FF5733;">20</span><span style="color:#8BC34A;">01</span></h1>', unsafe_allow_html=True)
             st.plotly_chart(f.plot_delay_pie_chart(df2001), use_container_width=True, align='center')
         st.divider()
 
         # Line chart
         A1, A2, A3 = st.columns([1, 0.2, 1])
         with A1:
+            st.markdown('<h1 style="text-align:center;"><span style="color:darkblue;">19</span><span style="color:darkyellow;">91</span></h1>', unsafe_allow_html=True)
             st.plotly_chart(f.plot_flights_by_carrier(df1991), use_container_width=True)
         with A3:
+            st.markdown('<h1 style="text-align:center;"><span style="color:darkblue;">20</span><span style="color:darkyellow;">01</span></h1>', unsafe_allow_html=True)
             st.plotly_chart(f.plot_flights_by_carrier(df2001), use_container_width=True)
         st.divider()
 
@@ -168,13 +194,5 @@ with st.spinner("Loading..."):
 # # Assuming df2 is your DataFrame
 # fig = f.create_box_plots(df2[attributes_to_plot])
 
-# # Display the plot using Streamlit
+# # Display the plot using Streamlitr
 # st.pyplot(fig)
-
-# df1 = df1.drop(columns = ['TailNum', 'AirTime', 'TaxiIn', 'TaxiOut', 'CancellationCode',
-#         'CarrierDelay', 'WeatherDelay', 'NASDelay', 'SecurityDelay', 'LateAircraftDelay'])
-# df1 = df1.dropna(axis= 0, how = 'any')
-
-# df2 = df2.drop(columns = ['CancellationCode', 'CarrierDelay', 'WeatherDelay', 'NASDelay',
-#                         'SecurityDelay', 'LateAircraftDelay'])
-# df2 = df2.dropna(axis= 0, how = 'any')
