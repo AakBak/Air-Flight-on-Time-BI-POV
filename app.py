@@ -4,6 +4,7 @@ import numpy as np
 import plotly.graph_objs as go
 import functions as f
 from numerize.numerize import numerize
+from st_pages import Page, show_pages, Section
 
 st.set_page_config(
     page_title="Business Intelligence",
@@ -12,6 +13,12 @@ st.set_page_config(
     initial_sidebar_state="auto",
     menu_items=None
 )
+
+show_pages([
+    Page("pages/problem-statement.py", "Problem Statement", "🔍"),
+    Page("app.py", "Data Preparation", "🛠️"),
+    Page("pages/Pyspark-flights.py", "Feature Engineering", "💡"),
+    ])
 
 video_source = "https://assets.mixkit.co/videos/preview/mixkit-airplane-flying-in-a-red-cloudy-sky-1146-large.mp4"
 
@@ -45,6 +52,18 @@ df1 = df1.dropna(axis= 0, how = 'any')
 df2 = df2_uncleaned.drop(columns = ['CancellationCode', 'CarrierDelay', 'WeatherDelay', 'NASDelay',
                         'SecurityDelay', 'LateAircraftDelay'])
 df2 = df2.dropna(axis= 0, how = 'any')
+
+# # Cleaned data
+# df1 = df1_uncleaned.drop(columns = ['Year', 'CRSDepTime','ArrTime','CRSArrTime', 'TailNum', 'CRSElapsedTime', 'AirTime', 'TaxiIn', 'TaxiOut', 'CancellationCode',
+#         'CarrierDelay', 'WeatherDelay', 'NASDelay', 'SecurityDelay', 'LateAircraftDelay'])
+# df1 = df1.dropna(axis= 0, how = 'any')
+# df2 = df2_uncleaned.drop(columns = ['Year', 'CRSDepTime','ArrTime','CRSArrTime', 'CRSElapsedTime', 'CancellationCode', 'CarrierDelay', 'WeatherDelay', 'NASDelay',
+#                         'SecurityDelay', 'LateAircraftDelay'])
+# df2 = df2.dropna(axis= 0, how = 'any')
+
+# # Save cleaned data to new compressed CSV files
+# df1.to_csv('./1991_cleaned_.csv', index=False)
+# df2.to_csv('./2001_cleaned.csv', index=False)
 
 # Sidebar
 # display_null_values = st.sidebar.checkbox(label="Display Null Values")
@@ -81,7 +100,7 @@ df1991 = df1.query(query) if query else df1
 df2001 = df2.query(query) if query else df2
 
 # Tabs
-tab1, tab2, tab3 = st.tabs(["Datasets", "Data Cleaning", "Data Exploration"])
+tab1, tab2, tab3 = st.tabs(["Data Collection", "Data Cleaning", "Data Exploration"])
 
 # Dashboard design
 with st.spinner("Loading..."):
@@ -180,19 +199,12 @@ with st.spinner("Loading..."):
         # Line chart
         A1, A2, A3 = st.columns([1, 0.2, 1])
         with A1:
-            st.markdown('<h1 style="text-align:center;"><span style="color:darkblue;">19</span><span style="color:darkyellow;">91</span></h1>', unsafe_allow_html=True)
+            st.markdown('<h1 style="text-align:center;"><span style="color:darkblue;">19</span><span style="color:yellow;">91</span></h1>', unsafe_allow_html=True)
             st.plotly_chart(f.plot_flights_by_carrier(df1991), use_container_width=True)
         with A3:
-            st.markdown('<h1 style="text-align:center;"><span style="color:darkblue;">20</span><span style="color:darkyellow;">01</span></h1>', unsafe_allow_html=True)
+            st.markdown('<h1 style="text-align:center;"><span style="color:darkblue;">20</span><span style="color:yellow;">01</span></h1>', unsafe_allow_html=True)
             st.plotly_chart(f.plot_flights_by_carrier(df2001), use_container_width=True)
         st.divider()
 
-# attributes_to_plot = ['DepTime', 'CRSDepTime', 'ArrTime', 'CRSArrTime', 'ActualElapsedTime',
-#                       'CRSElapsedTime', 'AirTime', 'ArrDelay', 'DepDelay', 'Distance', 'TaxiIn',
-#                       'TaxiOut']
-
-# # Assuming df2 is your DataFrame
-# fig = f.create_box_plots(df2[attributes_to_plot])
-
-# # Display the plot using Streamlitr
-# st.pyplot(fig)
+# st.dataframe(f.add_columns(df1991).head(10))
+# f.add_columns(df2001)
