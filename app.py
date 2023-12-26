@@ -16,8 +16,8 @@ st.set_page_config(
 
 show_pages([
     Page("pages/problem-statement.py", "Problem Statement", "🔍"),
-    Page("app.py", "Data Preparation", "🛠️"),
-    Page("pages/Pyspark-flights.py", "Feature Engineering", "💡"),
+    Page("app.py", "Data Pre-Processing", "⌛"),  
+    Page("pages/model.py", "Modelling", "💡"),
     ])
 
 video_source = "https://assets.mixkit.co/videos/preview/mixkit-airplane-flying-in-a-red-cloudy-sky-1146-large.mp4"
@@ -65,9 +65,6 @@ df2 = df2.dropna(axis= 0, how = 'any')
 # df1.to_csv('./1991_cleaned_.csv', index=False)
 # df2.to_csv('./2001_cleaned.csv', index=False)
 
-# Sidebar
-# display_null_values = st.sidebar.checkbox(label="Display Null Values")
-# display_dataset = st.sidebar.checkbox(label="Dispaly Dataset")
 with st.sidebar.expander("Filter"):
     feature_selection1 = st.multiselect(label="Airline", options = np.union1d(df1['UniqueCarrier'].unique(), df2['UniqueCarrier'].unique()))
     feature_selection2 = st.multiselect(label="Origin", options = np.union1d(df1['Origin'].unique(), df2['Origin'].unique()))
@@ -205,6 +202,23 @@ with st.spinner("Loading..."):
             st.markdown('<h1 style="text-align:center;"><span style="color:darkblue;">20</span><span style="color:yellow;">01</span></h1>', unsafe_allow_html=True)
             st.plotly_chart(f.plot_flights_by_carrier(df2001), use_container_width=True)
         st.divider()
+        
+        # Heat Map
+        A1, A2, A3 = st.columns([1, 0.2, 1])
+        with A1:
+            st.markdown('<h1 style="text-align:center;"><span style="color:darkblue;">19</span><span style="color:yellow;">91</span></h1>', unsafe_allow_html=True)
+            st.plotly_chart(f.plot_3d_correlation_heatmap(df1991), use_container_width=True)
+        with A3:
+            st.markdown('<h1 style="text-align:center;"><span style="color:darkblue;">20</span><span style="color:yellow;">01</span></h1>', unsafe_allow_html=True)
+            st.plotly_chart(f.plot_3d_correlation_heatmap(df2001), use_container_width=True)
+        st.divider()
 
-# st.dataframe(f.add_columns(df1991).head(10))
-# f.add_columns(df2001)
+        # Heat Map
+        A1, A2, A3 = st.columns([1, 0.2, 1])
+        with A1:
+            st.markdown('<h1 style="text-align:center;"><span style="color:darkblue;">19</span><span style="color:yellow;">91</span></h1>', unsafe_allow_html=True)
+            st.pyplot(f.plot_correlation_heatmap(df1991), use_container_width=True)
+        with A3:
+            st.markdown('<h1 style="text-align:center;"><span style="color:darkblue;">20</span><span style="color:yellow;">01</span></h1>', unsafe_allow_html=True)
+            st.pyplot(f.plot_correlation_heatmap(df2001), use_container_width=True)
+        st.divider()

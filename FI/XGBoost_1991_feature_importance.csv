@@ -1,0 +1,14 @@
+Feature,Importance
+Month,0.0013315205
+DayofMonth,0.00028752643
+DayOfWeek,0.0037200078
+DepTime,0.0009845145
+UniqueCarrier,0.0007788486
+FlightNum,0.0071596266
+ActualElapsedTime,0.040330417
+DepDelay,0.012948487
+Origin,0.0
+Dest,0.0
+Distance,0.008632672
+Cancelled,0.003967211
+Diverted,0.002822013

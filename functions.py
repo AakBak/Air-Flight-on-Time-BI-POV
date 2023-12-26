@@ -4,6 +4,8 @@ from plotly.subplots import make_subplots
 from pyspark.ml import Pipeline
 from pyspark.ml.feature import StringIndexer, OneHotEncoder, VectorAssembler
 import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 def plot_delayed_flights(df):
     # Group by airline and calculate the number of delayed and non-delayed flights
@@ -256,3 +258,100 @@ def encode_and_assemble(df, categorical_cols, target_col):
 def add_columns (df):
     df['DELAYED'] = np.where(df['ArrDelay'] <= 0, 0, 1)
     return df
+
+def plot_3d_correlation_heatmap(dataset):
+    # Exclude columns from the correlation matrix
+    excluded_columns = ['Year', 'Month', 'DayofMonth', 'DayOfWeek', 'Cancelled', 'Diverted']
+    columns_to_include = [col for col in dataset.columns if col not in excluded_columns]
+
+    # Subset the dataset to include only relevant columns
+    subset_dataset = dataset[columns_to_include]
+
+    # Calculate correlation matrix
+    correlation_matrix = subset_dataset.corr()
+
+    # Get row and column names for the heatmap
+    rows, cols = correlation_matrix.index, correlation_matrix.columns
+
+    # Create a 3D surface plot
+    trace = go.Surface(z=correlation_matrix.values,
+                      x=cols,
+                      y=rows,
+                      colorscale='Viridis')
+
+    layout = go.Layout(title='3D Correlation Heatmap',
+                       scene=dict(
+                           xaxis=dict(title=' ', tickmode='array', tickvals=list(range(len(cols))), ticktext=cols),
+                           yaxis=dict(title=' ', tickmode='array', tickvals=list(range(len(rows))), ticktext=rows),
+                           zaxis=dict(title='Correlation'),
+                           camera=dict(eye=dict(x=-2, y=-2, z=1.25))  # Adjusted the camera position
+                       ),
+                       width=400,  # Adjust the width of the plot
+                       height=700
+                        ) # Adjust the height of the plot)
+
+    fig = go.Figure(data=[trace], layout=layout)
+
+    return fig
+
+def plot_correlation_heatmap(dataset):
+    # Exclude columns from the correlation matrix
+    excluded_columns = ['Year', 'Month', 'DayofMonth', 'DayOfWeek', 'Cancelled', 'Diverted']
+    columns_to_include = [col for col in dataset.columns if col not in excluded_columns]
+
+    # Subset the dataset to include only relevant columns
+    subset_dataset = dataset[columns_to_include]
+
+    # Calculate correlation matrix
+    correlation_matrix = subset_dataset.corr()
+
+    # Set up the matplotlib figure
+    fig, ax = plt.subplots(figsize=(10, 8), facecolor='none')
+
+    # Create a heatmap using seaborn
+    sns.heatmap(correlation_matrix, annot=True, cmap='viridis', fmt=".2f", linewidths=.5, ax=ax)
+
+    # Set x and y label colors to white
+    ax.xaxis.label.set_color('white')
+    ax.yaxis.label.set_color('white')
+
+    # Set x and y tick colors to white
+    ax.tick_params(axis='x', colors='white')
+    ax.tick_params(axis='y', colors='white')
+
+    # Customize color bar title and tick labels
+    cbar = ax.collections[0].colorbar
+    cbar.set_label('Correlation', color='white')
+    cbar.ax.yaxis.label.set_color('white')
+    cbar.ax.tick_params(axis='y', colors='white')
+
+    # Set the title of the plot
+    ax.set_title('Correlation Heatmap', color='white')
+
+    return fig
+
+import plotly.graph_objects as go
+
+def plot_feature_importance(df_combined, model_name):
+    # Sort the DataFrame by the model_name column in descending order
+    df_combined_sorted = df_combined.sort_values(by=model_name, ascending=True)
+
+    # Create a horizontal bar plot
+    fig = go.Figure()
+    fig.add_trace(go.Bar(
+        y=df_combined_sorted['Feature'],
+        x=df_combined_sorted[model_name],
+        orientation='h',
+        marker_color=px.colors.sequential.Reds + px.colors.sequential.Reds_r
+    ))
+
+    # Customize layout
+    fig.update_layout(
+        # title=f'{model_name} Feature Importance',
+        xaxis_title='Percentage %',
+        yaxis_title='Feature',
+        margin=dict(l=0, r=0, t=30, b=0)  # Adjust margins as needed
+    )
+
+    # Show the Plotly figure using Streamlit
+    return fig
