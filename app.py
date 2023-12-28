@@ -16,8 +16,9 @@ st.set_page_config(
 
 show_pages([
     Page("pages/problem-statement.py", "Problem Statement", "🔍"),
-    Page("app.py", "Data Pre-Processing", "⌛"),  
-    Page("pages/model.py", "Modelling", "💡"),
+    Page("app.py", "Data Pre-Processing", "⌛"),
+    Page("pages/feature_engineering.py", "Feature Engineering", "🛠️"),  
+    Page("pages/model.py", "Modelling", "💡")
     ])
 
 video_source = "https://assets.mixkit.co/videos/preview/mixkit-airplane-flying-in-a-red-cloudy-sky-1146-large.mp4"
@@ -102,13 +103,13 @@ tab1, tab2, tab3 = st.tabs(["Data Collection", "Data Cleaning", "Data Exploratio
 # Dashboard design
 with st.spinner("Loading..."):
     with tab1:
-        A1, A2, A3 = st.columns([1, 0.2, 1])
+        A1, A2, A3 = st.columns([1, 0.1, 1])
         with A1:
             st.markdown('<h1 style="text-align:center;color:lightblue;">1991 Flights</h1>', unsafe_allow_html=True)
-            st.dataframe(data=df1_uncleaned.head(50), use_container_width=True)
+            st.dataframe(data=df1_uncleaned.head(50), use_container_width=True, hide_index=True)
         with A3:
             st.markdown('<h1 style="text-align:center;color:lightblue;">2001 Flights</h1>', unsafe_allow_html=True)
-            st.dataframe(data=df2_uncleaned.head(50), use_container_width=True)
+            st.dataframe(data=df2_uncleaned.head(50), use_container_width=True, hide_index=True)
     
     with tab2:
         A1, A2, A3 = st.columns([1, 0.2, 1])

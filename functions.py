@@ -136,8 +136,8 @@ def plot_delay_pie_chart(df):
 
     fig.update_layout(
         # title=dict(text='Percentage of Delayed and Non-Delayed Flights', font=dict(color='grey'), y=1),
-        width=750,
-        height=500,
+        # width=400,
+        # height=300,
         showlegend=False,
         legend=dict(y=1.12, orientation='v')
     )
@@ -336,6 +336,9 @@ def plot_feature_importance(df_combined, model_name):
     # Sort the DataFrame by the model_name column in descending order
     df_combined_sorted = df_combined.sort_values(by=model_name, ascending=True)
 
+    # Multiply x values by 100 to represent percentages
+    df_combined_sorted[model_name] *= 100
+
     # Create a horizontal bar plot
     fig = go.Figure()
     fig.add_trace(go.Bar(
@@ -348,9 +351,33 @@ def plot_feature_importance(df_combined, model_name):
     # Customize layout
     fig.update_layout(
         # title=f'{model_name} Feature Importance',
-        xaxis_title='Percentage %',
+        xaxis_title='Importance %',
         yaxis_title='Feature',
-        margin=dict(l=0, r=0, t=30, b=0)  # Adjust margins as needed
+        margin=dict(l=0, r=0, t=30, b=0),  # Adjust margins as needed
+        height=350,  # Set the height of the plot
+        width=70    # Set the width of the plot
+    )
+    
+    # Set the x-axis range to be up to 60%
+    fig.update_xaxes(range=[0, 70], showgrid=True, gridcolor='grey', griddash='dash')
+    # Add a horizontal grid for the y-axis
+    # fig.update_yaxes(showgrid=True, gridcolor='lightgrey')
+
+    # Show the Plotly figure using Streamlit
+    return fig
+
+def plot_accuracies(Acc, year):
+    # Extract the year from the column name
+    col_name = f'{year} Accuracy'
+
+    # Create a bar chart using Plotly Express
+    fig = px.bar(
+        Acc,
+        x='Model',
+        y=col_name,
+        title=f'Accuracies for {year}',
+        labels={'x': 'Model', 'y': 'Accuracy'},
+        color='Model'
     )
 
     # Show the Plotly figure using Streamlit

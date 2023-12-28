@@ -16,8 +16,9 @@ st.set_page_config(
 
 show_pages([
     Page("pages/problem-statement.py", "Problem Statement", "🔍"),
-    Page("app.py", "Data Pre-Processing", "⌛"),  
-    Page("pages/model.py", "Modelling", "💡"),
+    Page("app.py", "Data Pre-Processing", "⌛"),
+    Page("pages/feature_engineering.py", "Feature Engineering", "🛠️"),  
+    Page("pages/model.py", "Modelling", "💡")
     ])
 
 video_source = "https://assets.mixkit.co/videos/preview/mixkit-airplane-flying-in-a-red-cloudy-sky-1146-large.mp4"
@@ -40,15 +41,14 @@ st.markdown(f"""
 @st.cache_data
 def load_data():
 
-    df1991_FI = pd.read_csv('feature_importance/combined_feature_importance_1991.csv')
-    df2001_FI = pd.read_csv('feature_importance/combined_feature_importance_2001.csv')
+    df1991_FI = pd.read_csv('feature_importance/feature_importance_1991.csv')
+    df2001_FI = pd.read_csv('feature_importance/feature_importance_2001.csv')
 
-    df1991_Acc = pd.read_csv('accuracy_table_1991.csv')
-    df2001_Acc = pd.read_csv('accuracy_table_2001.csv')
+    Acc = pd.read_csv('accuracies/accuracies.csv')
 
-    return df1991_FI, df2001_FI, df1991_Acc, df2001_Acc
+    return df1991_FI, df2001_FI, Acc
 
-df1991_FI, df2001_FI, df1991_Acc, df2001_Acc = load_data()
+df1991_FI, df2001_FI, Acc = load_data()
 
 # Tabs
 tab1, tab2 = st.tabs(["Feature Importance", "Model Predictions"])
@@ -62,19 +62,25 @@ with st.spinner("Loading..."):
             B1, B2 = st.columns([1, 1])
             with B1:
                 st.markdown('<h1 style="text-align:center;font-size: 18px;"><span style="color:red;">DF Feature</span><span style="color:red;">Importance</span></h1>', unsafe_allow_html=True)
-                st.plotly_chart(f.plot_feature_importance(df1991_FI, 'DT'), use_container_width=True)
+                st.plotly_chart(f.plot_feature_importance(df1991_FI, 'DT_Importance'), use_container_width=True)
             with B2:
                 st.markdown('<h1 style="text-align:center;font-size: 18px;"><span style="color:darkred;">XGBoost Fe</span><span style="color:darkred;">ature Importance</span></h1>', unsafe_allow_html=True)
-                st.plotly_chart(f.plot_feature_importance(df1991_FI, 'XGBoost'), use_container_width=True)
+                st.plotly_chart(f.plot_feature_importance(df1991_FI, 'XGB_Importance'), use_container_width=True)
         with A2:
             st.markdown('<h1 style="text-align:center;"><span style="color:darkred;">20</span><span style="color:red;">01</span></h1>', unsafe_allow_html=True)
             B1, B2 = st.columns([1, 1])
             with B1:
                 st.markdown('<h1 style="text-align:center;font-size: 18px;"><span style="color:red;">DF Feature</span><span style="color:red;">Importance</span></h1>', unsafe_allow_html=True)
-                st.plotly_chart(f.plot_feature_importance(df2001_FI, 'DT'), use_container_width=True)
+                st.plotly_chart(f.plot_feature_importance(df2001_FI, 'DT_Importance'), use_container_width=True)
             with B2:
                 st.markdown('<h1 style="text-align:center;font-size: 18px;"><span style="color:darkred;">XGBoost Fe</span><span style="color:darkred;">ature Importance</span></h1>', unsafe_allow_html=True)
-                st.plotly_chart(f.plot_feature_importance(df2001_FI, 'XGBoost'), use_container_width=True)
+                st.plotly_chart(f.plot_feature_importance(df2001_FI, 'XGB_Importance'), use_container_width=True)
     
     with tab2:
-        st.dataframe(data=df1991_Acc, use_container_width=True)
+        A1, A2, A3 = st.columns([1, 0.2, 1])
+        with A1:
+            st.markdown('<h1 style="text-align:center;"><span style="color:#FF5733;">19</span><span style="color:#8BC34A;">91</span></h1>', unsafe_allow_html=True)
+            st.plotly_chart(f.plot_accuracies(Acc, year=1991), use_container_width=True)
+        with A3:
+            st.markdown('<h1 style="text-align:center;"><span style="color:#FF5733;">20</span><span style="color:#8BC34A;">01</span></h1>', unsafe_allow_html=True)
+            st.plotly_chart(f.plot_accuracies(Acc, year=2001), use_container_width=True)

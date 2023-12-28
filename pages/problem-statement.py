@@ -11,8 +11,9 @@ st.set_page_config(
 
 show_pages([
     Page("pages/problem-statement.py", "Problem Statement", "🔍"),
-    Page("app.py", "Data Pre-Processing", "⌛"),  
-    Page("pages/model.py", "Modelling", "💡"),
+    Page("app.py", "Data Pre-Processing", "⌛"),
+    Page("pages/feature_engineering.py", "Feature Engineering", "🛠️"),  
+    Page("pages/model.py", "Modelling", "💡")
     ])
 
 video_source = "https://assets.mixkit.co/videos/preview/mixkit-airplane-flying-in-a-red-cloudy-sky-1146-large.mp4"
