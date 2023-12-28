@@ -1,8 +1,6 @@
 import plotly.graph_objs as go
 import plotly.express as px
 from plotly.subplots import make_subplots
-from pyspark.ml import Pipeline
-from pyspark.ml.feature import StringIndexer, OneHotEncoder, VectorAssembler
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
