@@ -1,5 +1,5 @@
 import streamlit as st
-from st_pages import Page, show_pages, Section
+from st_pages import Page, show_pages
 
 st.set_page_config(
     page_title="Business Intelligence",

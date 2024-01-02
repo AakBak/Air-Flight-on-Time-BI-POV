@@ -1,10 +1,9 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import plotly.graph_objs as go
 import functions as f
 from numerize.numerize import numerize
-from st_pages import Page, show_pages, Section
+from st_pages import Page, show_pages
 
 st.set_page_config(
     page_title="Business Intelligence",
