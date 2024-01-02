@@ -227,32 +227,6 @@ def plot_flights_by_carrier(df):
 
     return fig
 
-def encode_and_assemble(df, categorical_cols, target_col):
-    # Define stages for the pipeline
-    stages = []
-
-    # Apply StringIndexer to categorical columns
-    for col in categorical_cols:
-        indexer = StringIndexer(inputCol=col, outputCol=f"{col}_index")
-        stages.append(indexer)
-
-    # Apply OneHotEncoder to indexed categorical columns
-    encoded_cols = [f"{col}_index" for col in categorical_cols]
-    encoder = OneHotEncoder(inputCols=encoded_cols, outputCols=[f"{col}_encoded" for col in categorical_cols])
-    stages.append(encoder)
-
-    # Assemble features including one-hot encoded columns
-    assembler_inputs = encoded_cols + [target_col]
-    assembler = VectorAssembler(inputCols=assembler_inputs, outputCol="features")
-    stages.append(assembler)
-
-    # Create and run the pipeline
-    pipeline = Pipeline(stages=stages)
-    model = pipeline.fit(df)
-    transformed_df = model.transform(df)
-
-    return transformed_df
-
 def add_columns (df):
     df['DELAYED'] = np.where(df['ArrDelay'] <= 0, 0, 1)
     return df
@@ -328,8 +302,6 @@ def plot_correlation_heatmap(dataset):
 
     return fig
 
-import plotly.graph_objects as go
-
 def plot_feature_importance(df_combined, model_name):
     # Sort the DataFrame by the model_name column in descending order
     df_combined_sorted = df_combined.sort_values(by=model_name, ascending=True)
@@ -357,7 +329,7 @@ def plot_feature_importance(df_combined, model_name):
     )
     
     # Set the x-axis range to be up to 60%
-    fig.update_xaxes(range=[0, 70], showgrid=True, gridcolor='grey', griddash='dash')
+    fig.update_xaxes(range=[0, 70], showgrid=True, gridcolor='#3B3B3B', griddash='0.5px')
     # Add a horizontal grid for the y-axis
     # fig.update_yaxes(showgrid=True, gridcolor='lightgrey')
 
@@ -368,15 +340,33 @@ def plot_accuracies(Acc, year):
     # Extract the year from the column name
     col_name = f'{year} Accuracy'
 
+    # Define colors for each model
+    color_sequence = ['darkred', '#FF5733']
+
+    # Create a new column with formatted accuracy values
+    Acc['formatted_accuracy'] = Acc[col_name].apply(lambda x: f'{round(x * 100, 1)} %')
+
     # Create a bar chart using Plotly Express
     fig = px.bar(
         Acc,
         x='Model',
-        y=col_name,
-        title=f'Accuracies for {year}',
-        labels={'x': 'Model', 'y': 'Accuracy'},
-        color='Model'
+        y=Acc[col_name] * 100,  # Multiply y values by 100
+        labels={'x': 'Model', 'y': 'Accuracy (%)'},  # Update y-axis label
+        color='Model',
+        color_discrete_sequence=color_sequence,  # Use the color sequence
+        text='formatted_accuracy',  # Use the new column for text
     )
 
-    # Show the Plotly figure using Streamlit
+    fig.update_traces(
+        textposition='inside',
+        insidetextanchor='middle',
+        textfont_color='white',
+        textfont_size=15 
+    )
+
+    fig.update_layout(
+        showlegend=False,
+    )
+
+    # Show the Plotly figure
     return fig
