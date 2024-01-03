@@ -368,5 +368,7 @@ def plot_accuracies(Acc, year):
         showlegend=False,
     )
 
+    fig.update_yaxes(showgrid=True, gridcolor='#3B3B3B', griddash='0.5px')
+
     # Show the Plotly figure
     return fig
