@@ -10,7 +10,7 @@ st.set_page_config(
 )
 
 show_pages([
-    Page("pages/problem-statement.py", "Problem Statement", "🔍"),
+    Page("pages/problem-statement.py", "On-Time Flight Study", "🔍"),
     Page("app.py", "Data Pre-Processing", "⌛"),
     Page("pages/feature_engineering.py", "Feature Engineering", "🛠️"),  
     Page("pages/model.py", "Modelling", "💡")
@@ -35,75 +35,91 @@ st.markdown(f"""
 
 st.divider()
 
-## Problem Statement
-st.header("🔍 Problem Statement:")
+# Problem Statement and Specific Objectives
+st.title(':red[Airline On-Time Performance]')
 
-st.markdown("""
-The airline industry constantly strives to enhance on-time performance, considering it a critical factor in customer satisfaction and operational efficiency. In the context of the provided data sets for the years 1991 and 2001, there is a need to analyze and compare the characteristics of flights that were on time in these two distinct periods. Additionally, the introduction of a comprehensive data collection system at a larger airport raises ethical concerns, particularly in the context of privacy, as outlined by Solove (2006).
-""")
+## Problem Statement
+st.header('🛫 Problem Statement:')
+st.write('The aviation industry aims to enhance on-time performance, operational efficiency, and passenger satisfaction. '
+         'This app conducts a comparative analysis of airline on-time data for 1991 and 2001, identifying key '
+         'characteristics of on-time flights and addressing evolving dynamics over the years. Ethical concerns related '
+         'to data collection initiatives at airports are also discussed based on Solove\'s (2006) framework.')
 
 ## Specific Objectives
-st.header("🎯 Specific Objectives:")
+st.header('🎯 Specific Objectives:')
+st.write('1. Compare and contrast the characteristics of on-time flights in the airline datasets for 1991 and 2001.'
+         '\n2. Identify and analyze additional analytics, including predictive and prescriptive insights, '
+         'to contribute to actionable strategies for improving on-time performance.'
+         '\n3. Assess potential ethical dilemmas and challenges associated with proposed data collection initiatives '
+         'at airports, considering Solove\'s (2006) framework for ethical data practices.')
 
-st.markdown("""
-1. **Comparison of On-Time Performance (1991 vs. 2001):**
-   - Identify key factors characterizing flights that were on time in 1991 and 2001.
-   - Analyze trends and patterns in on-time performance across the two years.
-   - Assess any notable changes or similarities between the two time periods.
+# Additional Analytics
+st.header('📊 Additional Analytics:')
+## Predictive Question
+st.subheader('🔮 Predictive Question:')
+st.write('Can historical data accurately predict flight delays, and if so, how effective are machine learning models in '
+         'achieving this?')
 
-2. **Additional Analytics Question:**
-   - Pose and answer a relevant analytics question, either predictive or prescriptive, to gain deeper insights into on-time performance.
+### Predictive Answer
+st.write('Yes, we can predict flight delays with a high degree of accuracy using machine learning models based on input parameters, '
+         'particularly XGBoost. The predictive models, when applied to the datasets of 1991 and 2001, demonstrated promising accuracies. '
+         'For the 1991 dataset, the XGBoost model achieved an accuracy of 86.74%, and for the 2001 dataset, an accuracy of 89.18%. '
+         'These results suggest that historical data, including features such as departure delay, actual elapsed time, and distance, '
+         'can be leveraged effectively to predict flight delays.')
 
-3. **Ethical Considerations in Data Collection at Airports:**
-   - Evaluate potential ethical dilemmas and problems that may arise from the planned data collection initiative at the larger airport.
-   - Apply Solove's taxonomy of privacy to assess the implications of collecting data from travelers' smartphones, flight plans, passport control, security control, and their interactions with shops and restaurants.
-   - Consider the ethical implications of implementing facial recognition systems in commercial spaces within the airport.
-""")
+## Prescriptive Question
+st.subheader('🚀 Prescriptive Question:')
+st.write('What actionable insights can be derived from the analysis to minimize flight delays and enhance overall '
+         'on-time performance in the aviation industry?')
 
-## Significance of the Study
-st.header("🌐 Significance of the Study:")
+### Prescriptive Answer
+st.write('Based on the feature importance analysis, several actionable insights can be derived to minimize flight delays:'
+         '\n- **Mitigate Departure Delays:** Given its significant impact, efforts should be directed towards minimizing departure delays. '
+         'Implementing operational strategies to ensure timely departures, such as efficient boarding processes and gate management, '
+         'can contribute to on-time arrivals.'
+         '\n- **Optimize Actual Elapsed Time:** Strategies to optimize actual elapsed time, especially for longer flights, can positively '
+         'influence on-time performance. This may involve streamlining in-flight processes or adjusting schedules to better align with optimal travel durations.'
+         '\n- **Consider Flight Distance:** Shorter flight distances are associated with higher chances of on-time arrivals. Airlines could '
+         'explore route optimizations or adjust schedules to prioritize shorter distances where feasible.'
+         '\n- **Operational Focus on TaxiIn and TaxiOut:** In the 2001 dataset, the inclusion of TaxiIn and TaxiOut as crucial features indicates '
+         'the importance of ground operations. Airlines and airports can focus on improving efficiency in taxiing processes, potentially through better '
+         'runway utilization or optimizing ground handling procedures.')
 
-st.markdown("""
-Understanding the characteristics of on-time flights in different years can provide valuable insights for airlines in optimizing their operations and improving punctuality. Additionally, the ethical evaluation of data collection practices is crucial to ensuring the protection of passengers' privacy rights and avoiding potential legal and reputational issues for the airport.
-""")
+# Ethical Considerations
+st.header('🤔 Ethical Considerations:')
+st.write('The integration of advanced technologies at an airport, involving the collection and categorization of traveler data, as well as the '
+         'implementation of features such as reminders and facial recognition systems, raises ethical considerations based on Solove (2006). Here is '
+         'a discussion of potential ethical dilemmas and issues:')
 
-## Expected Outcomes
-st.header("📈 Expected Outcomes:")
+## Information Collection
+st.subheader('**Information Collection:**')
+st.write('- The collection of data from travelers\' smartphones, flight plans, passport control, and security control necessitates transparency '
+         'and informed consent. It is crucial to clearly communicate the types of data being collected and how it will be utilized.')
 
-st.markdown("""
-1. A comprehensive analysis of on-time performance characteristics in 1991 and 2001.
-2. Insights from an additional analytics question, contributing to a better understanding of factors influencing on-time performance.
-3. Identification of potential ethical dilemmas and privacy concerns associated with the proposed data collection initiatives at the larger airport.
-""")
+## Data Categorization
+st.subheader('**Data Categorization:**')
+st.write('- Categorizing travelers based on the likelihood of causing flight delays introduces concerns about profiling. Ensuring fairness and '
+         'accuracy in the categorization process is essential to prevent biases or discrimination. Transparency and accountability in the '
+         'categorization algorithm are crucial.')
 
-## Research Approach
-st.header("🔍 Research Approach:")
+## Communication and Reminders
+st.subheader('**Communication and Reminders:**')
+st.write('- Sending reminders to travelers categorized as likely to cause late departures raises privacy and consent issues. Ensuring passengers are '
+         'well-informed about categorization criteria and providing opt-out options is crucial to respect individual autonomy.')
 
-st.markdown("""
-1. **Data Analysis:** Utilize statistical and exploratory data analysis techniques to compare on-time performance in 1991 and 2001.
-2. **Analytics Modeling:** Employ predictive or prescriptive analytics techniques to answer the additional analytics question.
-3. **Ethical Evaluation:** Apply Solove's taxonomy of privacy to systematically assess the ethical implications of the proposed data collection initiatives at the airport.
-""")
+## Staff Access to Dashboard
+st.subheader('**Staff Access to Dashboard:**')
+st.write('- Providing airport staff with access to a dashboard indicating potential traveler locations raises surveillance concerns. Clear guidelines '
+         'on access, usage, and preventing misuse are necessary to uphold privacy standards.')
 
-## Scope and Limitations
-st.header("🔒 Scope and Limitations:")
+## Facial Recognition in Public Spaces
+st.subheader('**Facial Recognition in Public Spaces:**')
+st.write('- Implementing facial recognition in public spaces raises privacy concerns. Safeguarding biometric data, obtaining consent, and adhering to '
+         'legal and ethical standards are crucial to prevent unauthorized surveillance.')
 
-st.markdown("""
-This study is limited to the analysis of on-time performance in the specified years and the ethical considerations of data collection at airports. The findings may be influenced by the availability and quality of the data sets and the specific context of the airport in question.
-""")
-
-## Research Timeline
-st.header("🗓️ Research Timeline:")
-
-st.markdown("""
-The research will be conducted over a specified time frame, encompassing data collection, analysis, and ethical evaluation. Regular progress assessments will be conducted to ensure timely completion of the study.
-""")
-
-## Deliverables
-st.header("📦 Deliverables:")
-
-st.markdown("""
-1. Comparative analysis of on-time performance.
-2. Findings from the additional analytics question.
-3. Ethical assessment report based on Solove's taxonomy.
-""")
+st.subheader('📚 Overall Ethical Reflection:')
+st.write('1. **Privacy and Consent:** Transparency and informed consent are critical for respecting travelers\' privacy.'
+         '\n2. **Fairness and Non-Discrimination:** Categorization should avoid biases to ensure fair treatment of all travelers.'
+         '\n3. **Data Security and Access Control:** Robust security measures and access controls are necessary to prevent data misuse.'
+         '\n4. **Legal Compliance:** Adherence to privacy laws is essential to protect individuals\' rights.'
+         '\n5. **Public Awareness and Communication:** Open communication about data practices builds trust and enables informed decision-making.')

@@ -12,7 +12,7 @@ st.set_page_config(
 )
 
 show_pages([
-    Page("pages/problem-statement.py", "Problem Statement", "🔍"),
+    Page("pages/problem-statement.py", "On-Time Flight Study", "🔍"),
     Page("app.py", "Data Pre-Processing", "⌛"),
     Page("pages/feature_engineering.py", "Feature Engineering", "🛠️"),  
     Page("pages/model.py", "Modelling", "💡")

@@ -14,7 +14,7 @@ st.set_page_config(
 )
 
 show_pages([
-    Page("pages/problem-statement.py", "Problem Statement", "🔍"),
+    Page("pages/problem-statement.py", "On-Time Flight Study", "🔍"),
     Page("app.py", "Data Pre-Processing", "⌛"),
     Page("pages/feature_engineering.py", "Feature Engineering", "🛠️"),  
     Page("pages/model.py", "Modelling", "💡")
@@ -201,24 +201,4 @@ with st.spinner("Loading..."):
         with A3:
             st.markdown('<h1 style="text-align:center;"><span style="color:darkblue;">20</span><span style="color:yellow;">01</span></h1>', unsafe_allow_html=True)
             st.plotly_chart(f.plot_flights_by_carrier(df2001), use_container_width=True)
-        st.divider()
-        
-        # Heat Map
-        A1, A2, A3 = st.columns([1, 0.2, 1])
-        with A1:
-            st.markdown('<h1 style="text-align:center;"><span style="color:darkblue;">19</span><span style="color:yellow;">91</span></h1>', unsafe_allow_html=True)
-            st.plotly_chart(f.plot_3d_correlation_heatmap(df1991), use_container_width=True)
-        with A3:
-            st.markdown('<h1 style="text-align:center;"><span style="color:darkblue;">20</span><span style="color:yellow;">01</span></h1>', unsafe_allow_html=True)
-            st.plotly_chart(f.plot_3d_correlation_heatmap(df2001), use_container_width=True)
-        st.divider()
-
-        # Heat Map
-        A1, A2, A3 = st.columns([1, 0.2, 1])
-        with A1:
-            st.markdown('<h1 style="text-align:center;"><span style="color:darkblue;">19</span><span style="color:yellow;">91</span></h1>', unsafe_allow_html=True)
-            st.pyplot(f.plot_correlation_heatmap(df1991), use_container_width=True)
-        with A3:
-            st.markdown('<h1 style="text-align:center;"><span style="color:darkblue;">20</span><span style="color:yellow;">01</span></h1>', unsafe_allow_html=True)
-            st.pyplot(f.plot_correlation_heatmap(df2001), use_container_width=True)
         st.divider()
