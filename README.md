@@ -18,9 +18,4 @@ To run the web application locally, follow these steps:
 ## Ethical Considerations
 The project also addresses ethical considerations related to data collection and the integration of advanced technologies at airports. The README encourages users to be mindful of privacy, fairness, transparency, and legal compliance when utilizing similar data in their projects.
 
-## Conclusion
-The README file concludes by emphasizing the pivotal role of transparency, fairness, and traveler privacy in navigating the intersection of technological advancements and ethical considerations. It encourages a commitment to upholding ethical standards for fostering trust and advancing the aviation industry's efficiency and reliability.
-
 Feel free to explore the analysis and insights through the web application and refer to the detailed report for a comprehensive understanding of the project. If you have any questions or feedback, please don't hesitate to reach out.
-
-**Link to the Streamlit Web Application: [Flights-1991-2001](https://huggingface.co/spaces/AakBak/BI-Flights-1991-2001)**
