@@ -23,4 +23,4 @@ The README file concludes by emphasizing the pivotal role of transparency, fairn
 
 Feel free to explore the analysis and insights through the web application and refer to the detailed report for a comprehensive understanding of the project. If you have any questions or feedback, please don't hesitate to reach out.
 
-**Link to the Streamlit Web Application: [BI-Flights-1991-2001](https://huggingface.co/spaces/AakBak/BI-Flights-1991-2001{:target="_blank"})**
+**Link to the Streamlit Web Application: <a href="https://huggingface.co/spaces/AakBak/BI-Flights-1991-2001">BI-Flights-1991-2001</a>**
