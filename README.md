@@ -5,7 +5,7 @@ This repository contains a detailed analysis of airline on-time data for the yea
 The analysis encompasses various aspects of the airline on-time datasets, including data preprocessing, exploratory data analysis, feature engineering, and the application of machine learning models (Decision Trees and XGBoost). The comparison between 1991 and 2001 datasets highlights key characteristics influencing flight punctuality. The predictive and prescriptive analytics provide accurate delay predictions and actionable insights for minimizing flight delays.
 
 ## Web Application
-To interact with the analysis results and visualizations, a Streamlit web application has been created. You can access the app [here](https://huggingface.co/spaces/AakBak/BI-Flights-1991-2001). The app allows users to explore the trends, features, and insights derived from the analysis in a user-friendly manner.
+To interact with the analysis results and visualizations, a Streamlit web application has been created. You can access the app <a href="https://huggingface.co/spaces/AakBak/BI-Flights-1991-2001" target="_blank">here</a>. The app allows users to explore the trends, features, and insights derived from the analysis in a user-friendly manner.
 
 ## How to Run the Web Application Locally
 To run the web application locally, follow these steps:
